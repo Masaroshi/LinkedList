@@ -150,13 +150,8 @@ void SLLtoDLL() {
 
 void DisplaySLL() {
     Node *tmpNode = head;
-    if(isCLL()){
-        return;
-    }
-    else{
-        while (tmpNode != nullptr){
-            cout << (*tmpNode).data << " ";
-            tmpNode = (*tmpNode).next;
-        }
-    }
+    do{
+        cout << (*tmpNode).data << " ";
+        tmpNode = (*tmpNode).next;
+    } while (tmpNode != head);
 }
