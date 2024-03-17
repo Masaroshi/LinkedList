@@ -1,0 +1,15 @@
+As a Linked List I should be able to:
+
+    + Create a new node:
+        - at the beginning
+        - at the end
+        - at a specific position
+    + Delete a node:
+        - from the beginning
+        - from the end
+        - with a specific value
+        -  from a particular position
+    + Determine my length
+    + Convert to a Circular Linked List
+    + Convert to a Double link list
+    + Display my data
