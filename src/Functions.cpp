@@ -3,14 +3,18 @@
 #include "headers\Linked List Header.hpp"
 using namespace std;
 
-int timesOccurred(int targetData) {
+int timesOccurred(int target_data);
+int length();
+int isCLL();
+
+int timesOccurred(int target_data) {
     if (nullptr == head){
         return -1;
     }
     int counter = 0;
     Node *tmpNode = head;
     do {
-        if(targetData == (*tmpNode).data) {
+        if(target_data == (*tmpNode).data) {
             counter++;
         }
         tmpNode = (*tmpNode).next;
@@ -19,7 +23,21 @@ int timesOccurred(int targetData) {
     return counter;
 }
 
-bool isCLL() {
+int length() {
+    if (head == NULL) {
+        return 0;
+    }
+
+    int length = 0;
+    Node *tmpNode = head;
+    do {
+        length++;
+        tmpNode = (*tmpNode).next;
+    } while (tmpNode != head && tmpNode != nullptr);
+    return length;
+}
+
+int isCLL() {
     if (nullptr == head){
         return false;
     }
