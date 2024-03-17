@@ -18,7 +18,7 @@ int timesOccurred(int target_data) {
             counter++;
         }
         tmpNode = (*tmpNode).next;
-    } while (tmpNode != head);
+    } while (tmpNode != head && tmpNode != nullptr);
 
     return counter;
 }

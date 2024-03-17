@@ -1,15 +1,17 @@
 As a Linked List I should be able to:
-
     + Create a new node:
-        - at the beginning
-        - at the end
-        - at a specific position
+        - at the beginning .
+        - at the end . 
+        - at a specific position . 
     + Delete a node:
-        - from the beginning
-        - from the end
-        - with a specific value
-        -  from a particular position
-    + Determine my length
-    + Convert to a Circular Linked List
-    + Convert to a Double link list
-    + Display my data
+        - from the beginning . 
+        - from the end . 
+        - with a specific value . 
+        -  from a particular position . 
+    + Determine my length . 
+    + Convert to a Circular Linked List . 
+    + Convert to a Double Linked list
+    + Display my data . 
+    + Counts the number of times a data occurs . 
+    + Check if a linked list is Circular or not .
+    + Exchange first and last nodes
