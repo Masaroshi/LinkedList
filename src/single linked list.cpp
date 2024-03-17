@@ -153,5 +153,8 @@ void DisplaySLL() {
     do{
         cout << (*tmpNode).data << " ";
         tmpNode = (*tmpNode).next;
-    } while (tmpNode != head);
+    } while (tmpNode != head && tmpNode != nullptr);
+    if (isCLL()){
+        cout << "...";
+    }
 }
