@@ -50,7 +50,7 @@ void createSNodePosition(int position, int data) {
 
     for (int i = 0; i < position; i++){ // changing nodes and adresses until we get to the position
         prevNode = tmpNode;
-        tmpNode = (*tmpNode).next;
+        tmpNode = (*tmpNode).next; // to go through the list
     }
     if (prevNode != nullptr){
         (*prevNode).next = tmpNode2;
@@ -79,7 +79,7 @@ void deallocateSNodeByValue(int data) {
             return;
         }
         prevNode = tmpNode;
-        tmpNode = (*tmpNode).next;    
+        tmpNode = (*tmpNode).next; // to go through the list
     }
 }
 
@@ -99,7 +99,7 @@ void deallocateSNodeByItem(int item) {
 
     for (int i = 0; i < item && tmpNode != nullptr; i++){  // Loop until we reach the item
         prevNode = tmpNode;
-        tmpNode = (*tmpNode).next;
+        tmpNode = (*tmpNode).next; // to go through the list
     }
     if (nullptr == tmpNode) { // node not found
         return;
@@ -121,7 +121,7 @@ void deallocateLastSNode() {
 
     for (int i = 0; (*tmpNode).next != nullptr; i++){ // Loop until we reach the last node
         prevNode = tmpNode;
-        tmpNode = (*tmpNode).next;
+        tmpNode = (*tmpNode).next; // to go through the list
     }
     // Skip over the deleted node and handling the last node
     if (prevNode != nullptr) {
@@ -140,21 +140,42 @@ void deallocateFirstSNode() {
     delete tmpNode;
 }
 
+void exchangeFirstwLastSNode(){
+    if (nullptr == head) {
+        return;
+    }
+
+    Node *prevNode = nullptr;
+    Node *tmpNode  = head;
+
+    while (tmpNode -> next != nullptr) {
+        prevNode = tmpNode;
+        tmpNode = tmpNode -> next;
+    }
+
+    if (head -> data == tmpNode -> data){
+        return;
+    }
+
+    int tmp = head -> data;
+    head -> data = tmpNode -> data;
+    tmpNode -> data = tmp;
+}
+
 void SLLtoCLL() {
     (*tail).next = head;
 }
 
 void SLLtoDLL() {
-
-}
-
-void DisplaySLL() {
+    if (nullptr == head) {
+        return;
+    }
+    Node *prevNode = nullptr;
     Node *tmpNode = head;
-    do{
-        cout << (*tmpNode).data << " ";
-        tmpNode = (*tmpNode).next;
-    } while (tmpNode != head && tmpNode != nullptr);
-    if (isCLL()){
-        cout << "...";
+
+    while (tmpNode != nullptr){
+        (*tmpNode).prev = prevNode; // 
+        prevNode = tmpNode; // connecting prevNode to out node 
+        tmpNode = (*tmpNode).next; // to go through the list
     }
 }
