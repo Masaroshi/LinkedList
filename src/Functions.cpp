@@ -67,19 +67,22 @@ int isDLL() {
 
     Node *tmpNode = head;
 
-    while ((*tmpNode).next != nullptr) { // moving through the list forward until we reach the end
-        tmpNode = (*tmpNode).next; 
+    while (tmpNode->next != nullptr && tmpNode->next != head) { // moving through the list forward until we reach the end
+        tmpNode = tmpNode->next;
     }
-    
-    while (tmpNode != nullptr) { // going through the list backwards and checking if each node has a prev pointer or not.
-        if (nullptr == (*tmpNode).prev && tmpNode != head) {
+
+    tmpNode = head; // moving tmpNode back to the head for checking backward
+
+    while (tmpNode != nullptr && tmpNode != head) { // going through the list backwards and checking if each node has a prev pointer or not.
+        if (tmpNode->prev == nullptr && tmpNode != head) {
             return -1;
         }
-        tmpNode = (*tmpNode).prev; 
+        tmpNode = tmpNode->prev;
     }
-    
+
     return 1;
 }
+
 
 bool isEmpty(){
     if (nullptr == head) {
@@ -94,6 +97,7 @@ void DisplaySLL() {
         cout << (*tmpNode).data << " ";
         tmpNode = (*tmpNode).next; // to go through the list
     } while (tmpNode != head && tmpNode != nullptr);
+    
     if (isCLL() == 1) {
         cout << "...";
     }

@@ -147,8 +147,8 @@ void exchangeFirstwLastSNode(){
 
     Node *prevNode = nullptr;
     Node *tmpNode  = head;
-
-    while (tmpNode -> next != nullptr) {
+    
+    while (tmpNode -> next != nullptr && tmpNode -> next != head) {
         prevNode = tmpNode;
         tmpNode = tmpNode -> next;
     }
@@ -204,7 +204,7 @@ void SLLtoDLL() {
     Node *prevNode = nullptr;
     Node *tmpNode = head;
 
-    while (tmpNode != nullptr){
+    while (tmpNode != nullptr && tmpNode != head){
         (*tmpNode).prev = prevNode; // 
         prevNode = tmpNode; // connecting prevNode to out node 
         tmpNode = (*tmpNode).next; // to go through the list
