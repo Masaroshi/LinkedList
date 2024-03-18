@@ -6,10 +6,11 @@ using namespace std;
 int timesOccurred(int target_data);
 int length();
 int isCLL();
+int isDLL();
 
 int timesOccurred(int target_data) {
     if (nullptr == head){
-        return -1;
+        return 0; 
     }
     int counter = 0;
     Node *tmpNode = head;
@@ -39,19 +40,40 @@ int length() {
 
 int isCLL() {
     if (nullptr == head){
-        return false;
+        return 0;  // idk what to do here, is an empty list a CLL or a SLL?
     }
-    Node* Check1 = head;
-    Node* Check2 = head;
+    Node* Move1 = head;
+    Node* Move2 = head;
 
-    while (Check2 != nullptr && (*Check2).next != nullptr) {
-        Check1 = (*Check1).next;
-        Check2 = (*(*Check2).next).next;
+    while (Move2 != nullptr && (*Move2).next != nullptr) {
+        Move1 = (*Move1).next;
+        Move2 = (*(*Move2).next).next;
 
-        if (Check1 == Check2) {
-            return true;
+        if (Move1 == Move2) {
+            return 1;
         }
     }
 
-    return false;
+    return -1;
+}
+
+int isDLL() {
+    if (nullptr == head) {
+        return 0;
+    }
+
+    Node *tmpNode = head;
+
+    while ((*tmpNode).next != nullptr) { // moving through the list forward until we reach the end
+        tmpNode = (*tmpNode).next; 
+    }
+    
+    while (tmpNode != nullptr) { // going through the list backwards and checking if each node has a prev pointer or not.
+        if (nullptr == (*tmpNode).prev && tmpNode != head) {
+            return -1;
+        }
+        tmpNode = (*tmpNode).prev; 
+    }
+    
+    return 1;
 }

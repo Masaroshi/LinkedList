@@ -3,5 +3,6 @@
 
 int timesOccurred(int target_data);
 int length();
-bool isCLL();
+int isCLL();
+int isDLL();
 #endif
