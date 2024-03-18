@@ -7,6 +7,9 @@ int timesOccurred(int target_data);
 int length();
 int isCLL();
 int isDLL();
+bool isEmpty();
+
+// ============================================================= //
 
 int timesOccurred(int target_data) {
     if (nullptr == head){
@@ -76,4 +79,22 @@ int isDLL() {
     }
     
     return 1;
+}
+
+bool isEmpty(){
+    if (nullptr == head) {
+        return true;
+    }
+    return false;
+}
+
+void DisplaySLL() {
+    Node *tmpNode = head;
+    do {
+        cout << (*tmpNode).data << " ";
+        tmpNode = (*tmpNode).next; // to go through the list
+    } while (tmpNode != head && tmpNode != nullptr);
+    if (isCLL() == 1) {
+        cout << "...";
+    }
 }

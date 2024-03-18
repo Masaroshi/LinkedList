@@ -50,7 +50,7 @@ void createSNodePosition(int position, int data) {
 
     for (int i = 0; i < position; i++){ // changing nodes and adresses until we get to the position
         prevNode = tmpNode;
-        tmpNode = (*tmpNode).next; // to go through the list
+        tmpNode = (*tmpNode).next;
     }
     if (prevNode != nullptr){
         (*prevNode).next = tmpNode2;
@@ -99,7 +99,7 @@ void deallocateSNodeByItem(int item) {
 
     for (int i = 0; i < item && tmpNode != nullptr; i++){  // Loop until we reach the item
         prevNode = tmpNode;
-        tmpNode = (*tmpNode).next; // to go through the list
+        tmpNode = (*tmpNode).next;
     }
     if (nullptr == tmpNode) { // node not found
         return;
@@ -121,7 +121,7 @@ void deallocateLastSNode() {
 
     for (int i = 0; (*tmpNode).next != nullptr; i++){ // Loop until we reach the last node
         prevNode = tmpNode;
-        tmpNode = (*tmpNode).next; // to go through the list
+        tmpNode = (*tmpNode).next;
     }
     // Skip over the deleted node and handling the last node
     if (prevNode != nullptr) {
@@ -160,6 +160,37 @@ void exchangeFirstwLastSNode(){
     int tmp = head -> data;
     head -> data = tmpNode -> data;
     tmpNode -> data = tmp;
+}
+
+void exchangeSNode(int first, int second){
+    if (nullptr == head) {
+        return;
+    }
+    if (first <= 0 || second <= 0 || first > length() || second > length() || first == second) {
+        return;
+    }
+
+    Node *prevNode = nullptr;
+    Node *tmpNode  = head;
+    Node *tmpNode2 = head;
+
+    for (int i = 1; i < first; i++) {
+        prevNode = tmpNode;
+        tmpNode = tmpNode -> next;
+    }
+    prevNode = nullptr;
+    for (int i = 1; i < second; i++){
+        prevNode = tmpNode;
+        tmpNode2 = tmpNode2 -> next;
+    }
+
+    if (tmpNode -> data == tmpNode2 -> data){
+        return;
+    }
+
+    int tmp = tmpNode -> data;
+    tmpNode -> data = tmpNode2 -> data;
+    tmpNode2 -> data = tmp;
 }
 
 void SLLtoCLL() {
