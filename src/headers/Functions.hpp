@@ -10,4 +10,6 @@ void Display();
 void exchangeFirstwLast();
 void exchange(int first, int second);
 
+void reverse();
+
 #endif

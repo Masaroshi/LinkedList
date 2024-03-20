@@ -13,6 +13,9 @@ void deallocateLastSNode();
 void deallocateFirstSNode();
 void SLLtoCLL();
 void DisplaySLL();
+//                                     tail
+//              Node1             Node2 | 
+// head -> [data | next -]-> [data | next-]-> nullptr 
 
 
 // ======================================================================================//
@@ -140,59 +143,6 @@ void deallocateFirstSNode() {
     delete tmpNode;
 }
 
-void exchangeFirstwLastSNode(){
-    if (nullptr == head) {
-        return;
-    }
-
-    Node *prevNode = nullptr;
-    Node *tmpNode  = head;
-    
-    while (tmpNode -> next != nullptr && tmpNode -> next != head) {
-        prevNode = tmpNode;
-        tmpNode = tmpNode -> next;
-    }
-
-    if (head -> data == tmpNode -> data){
-        return;
-    }
-
-    int tmp = head -> data;
-    head -> data = tmpNode -> data;
-    tmpNode -> data = tmp;
-}
-
-void exchangeSNode(int first, int second){
-    if (nullptr == head) {
-        return;
-    }
-    if (first <= 0 || second <= 0 || first > length() || second > length() || first == second) {
-        return;
-    }
-
-    Node *prevNode = nullptr;
-    Node *tmpNode  = head;
-    Node *tmpNode2 = head;
-
-    for (int i = 1; i < first; i++) {
-        prevNode = tmpNode;
-        tmpNode = tmpNode -> next;
-    }
-    prevNode = nullptr;
-    for (int i = 1; i < second; i++){
-        prevNode = tmpNode;
-        tmpNode2 = tmpNode2 -> next;
-    }
-
-    if (tmpNode -> data == tmpNode2 -> data){
-        return;
-    }
-
-    int tmp = tmpNode -> data;
-    tmpNode -> data = tmpNode2 -> data;
-    tmpNode2 -> data = tmp;
-}
-
 void SLLtoCLL() {
     (*tail).next = head;
 }
@@ -204,8 +154,8 @@ void SLLtoDLL() {
     Node *prevNode = nullptr;
     Node *tmpNode = head;
 
-    while (tmpNode != nullptr && tmpNode != head){
-        (*tmpNode).prev = prevNode; // 
+    while (tmpNode != nullptr && tmpNode->next != head){
+        (*tmpNode).prev = prevNode;
         prevNode = tmpNode; // connecting prevNode to out node 
         tmpNode = (*tmpNode).next; // to go through the list
     }

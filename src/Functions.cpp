@@ -64,23 +64,14 @@ int isDLL() {
     if (nullptr == head) {
         return 0;
     }
-
+    Node *prevNode = nullptr;
     Node *tmpNode = head;
 
-    while (tmpNode->next != nullptr && tmpNode->next != head) { // moving through the list forward until we reach the end
-        tmpNode = tmpNode->next;
+    tmpNode = head;
+    if (tmpNode->next->prev == tmpNode) {
+        return 1;
     }
-
-    tmpNode = head; // moving tmpNode back to the head for checking backward
-
-    while (tmpNode != nullptr && tmpNode != head) { // going through the list backwards and checking if each node has a prev pointer or not.
-        if (tmpNode->prev == nullptr && tmpNode != head) {
-            return -1;
-        }
-        tmpNode = tmpNode->prev;
-    }
-
-    return 1;
+    return -1;
 }
 
 
@@ -98,12 +89,11 @@ void Display() {
         tmpNode = (*tmpNode).next; // to go through the list
     } while (tmpNode != head && tmpNode != nullptr);
     
-    if (isDLL){
-        cout << "<->";
-    }
-
-    else if (isCLL() == 1) {
+    if (isCLL() == 1) {
         cout << "...";
+    }
+    if (isDLL() == 1){
+        cout << "<->";
     }
 }
 
