@@ -6,5 +6,8 @@ int length();
 int isCLL();
 int isDLL();
 bool isEmpty();
-void DisplaySLL();
+void Display();
+void exchangeFirstwLast();
+void exchange(int first, int second);
+
 #endif

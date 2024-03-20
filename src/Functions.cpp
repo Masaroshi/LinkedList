@@ -91,14 +91,71 @@ bool isEmpty(){
     return false;
 }
 
-void DisplaySLL() {
+void Display() {
     Node *tmpNode = head;
     do {
         cout << (*tmpNode).data << " ";
         tmpNode = (*tmpNode).next; // to go through the list
     } while (tmpNode != head && tmpNode != nullptr);
     
-    if (isCLL() == 1) {
+    if (isDLL){
+        cout << "<->";
+    }
+
+    else if (isCLL() == 1) {
         cout << "...";
     }
+}
+
+void exchangeFirstwLast(){
+    if (nullptr == head) {
+        return;
+    }
+
+    Node *prevNode = nullptr;
+    Node *tmpNode  = head;
+    
+    while (tmpNode -> next != nullptr && tmpNode -> next != head) {
+        prevNode = tmpNode;
+        tmpNode = tmpNode -> next;
+    }
+
+    if (head -> data == tmpNode -> data){
+        return;
+    }
+
+    int tmp = head -> data;
+    head -> data = tmpNode -> data;
+    tmpNode -> data = tmp;
+}
+
+void exchange(int first, int second){
+    if (nullptr == head) {
+        return;
+    }
+    if (first <= 0 || second <= 0 || first > length() || second > length() || first == second) {
+        return;
+    }
+
+    Node *prevNode = nullptr;
+    Node *tmpNode  = head;
+    Node *tmpNode2 = head;
+
+    for (int i = 1; i < first; i++) {
+        prevNode = tmpNode;
+        tmpNode = tmpNode -> next;
+    }
+    prevNode = nullptr;
+    for (int i = 1; i < second; i++){
+        prevNode = tmpNode;
+        tmpNode2 = tmpNode2 -> next;
+    }
+
+    if (tmpNode -> data == tmpNode2 -> data){
+        return;
+    }
+
+    int tmp = tmpNode -> data;
+    tmpNode -> data = tmpNode2 -> data;
+    tmpNode2 -> data = tmp;
 }
