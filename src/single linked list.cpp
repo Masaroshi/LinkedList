@@ -17,7 +17,6 @@ void DisplaySLL();
 //              Node1             Node2 | 
 // head -> [data | next -]-> [data | next-]-> nullptr 
 
-
 // ======================================================================================//
 
 void createSNode(int data) {
@@ -71,11 +70,11 @@ void deallocateSNodeByValue(int data) {
                 head = (*tmpNode).next; // Update head if tmpNode is the head node
             }
 
-            else if (tail == tmpNode) {
+            if (tail == tmpNode) {
                 tail = prevNode; // Update tail if tmpNode is the tail node
             }
 
-            else if (prevNode != nullptr) {
+            if (prevNode != nullptr) {
                 (*prevNode).next = (*tmpNode).next; // Skip over the tmpNode
             }
             delete tmpNode; // free(tmpNode) Deallocate the memory of tmpNode (the node with same data)
@@ -100,7 +99,7 @@ void deallocateSNodeByItem(int item) {
         return;
     }
 
-    for (int i = 0; i < item && tmpNode != nullptr; i++){  // Loop until we reach the item
+    for (int i = 0; i < item && tmpNode != nullptr && tmpNode -> next != head; i++){  // Loop until we reach the item
         prevNode = tmpNode;
         tmpNode = (*tmpNode).next;
     }
@@ -108,7 +107,7 @@ void deallocateSNodeByItem(int item) {
         return;
     }
     // Skip over the deleted node and handling the last node
-    else if (prevNode != nullptr) {
+    if (prevNode != nullptr) {
         (*prevNode).next = (*tmpNode).next;
     }
     delete tmpNode;
