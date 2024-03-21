@@ -154,9 +154,9 @@ void SLLtoDLL() {
     Node *prevNode = nullptr;
     Node *tmpNode = head;
 
-    while (tmpNode != nullptr && tmpNode->next != head){
-        (*tmpNode).prev = prevNode;
+    while (tmpNode != nullptr && tmpNode -> next != head){
+        tmpNode -> prev = prevNode;
         prevNode = tmpNode; // connecting prevNode to out node 
-        tmpNode = (*tmpNode).next; // to go through the list
+        tmpNode = tmpNode -> next; // to go through the list
     }
 }
