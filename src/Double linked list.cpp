@@ -5,6 +5,17 @@ using namespace std;
 
 
 void createDNode(int data);
+void createDNodeStart(int data);
+void createDNodePosition(int position, int data);
+void deallocateDNodeByValue(int data);
+void deallocateDNodeByItem(int item);
+void deallocateLastDNode();
+void deallocateFirstDNode();
+
+//                                                   tail
+//                    Node1                  Node2   | 
+// nullptr <-[-prev | data | next-]->[prev | data | next]-> nullptr
+//                   head    |<-------|
 
 // ======================================================================================//
 
@@ -49,7 +60,7 @@ void createDNodePosition(int position, int data) {
 
     for (int i = 0; i < position; i++){
         prevNode = tmpNode;
-        tmpNode = (*tmpNode).next;
+        tmpNode = tmpNode -> next;
     }
 
     tmpNode2 -> prev = prevNode;
@@ -134,3 +145,46 @@ void deallocateDNodeByItem(int item) {
 
     delete tmpNode;
 }
+
+void deallocateLastDNode() {
+    if (nullptr == head) { // List is empty, nothing to delete
+        return;
+    }
+
+    Node *tmpNode = head;
+    Node *prevNode = nullptr;
+
+    for (int i = 0; tmpNode -> next != nullptr; i++){ // Loop until we reach the last node
+        prevNode = tmpNode;
+        tmpNode = tmpNode -> next;
+    }
+    // Skip over the deleted node and handling the last node
+    if (prevNode != nullptr) {
+        prevNode -> next = nullptr;
+        tail = prevNode; // Update the tail to the new last node
+    } 
+    else {
+        // if prevNode is nullptr, it means we are deleting the only node in the list
+        head = tail = nullptr;
+    }
+    delete tmpNode;
+}
+
+void deallocateFirstDNode() {
+    if (nullptr == head) {
+        return; // List is empty, nothing to delete
+    }
+
+    Node *tmpNode = head;
+    head = head -> next;
+
+    if (head != nullptr) {
+        head -> prev = nullptr;
+    } 
+    else {
+        tail = nullptr; // Update tail when there's only one node in the list
+    }
+
+    delete tmpNode;
+}
+

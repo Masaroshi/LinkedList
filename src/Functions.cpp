@@ -3,13 +3,43 @@
 #include "headers\Linked List Header.hpp"
 using namespace std;
 
+void LLtoCLL();
+void LLtoDLL();
 int timesOccurred(int target_data);
 int length();
-int isCLL();
-int isDLL();
+int isCLL();     // empty: 0, false: -1, true: 1
+int isDLL();     // empty: 0, false: -1, true: 1
 bool isEmpty();
+void Display();
+void exchangeFirstwLast();
+void exchange(int first, int second);
+void reverse();
+void reverseDisplay();
+void rotateBy(int NumberofRotates);
+void modify(int item, int data);
+void removeDuplicates();
+void bubbleSort();
+
 
 // ============================================================= //
+
+void LLtoCLL() {
+    tail -> next = head;
+}
+
+void LLtoDLL() {
+    if (nullptr == head) {
+        return;
+    }
+    Node *prevNode = nullptr;
+    Node *tmpNode = head;
+
+    while (tmpNode != nullptr && tmpNode -> next != head){
+        tmpNode -> prev = prevNode;
+        prevNode = tmpNode; // connecting prevNode to out node 
+        tmpNode = tmpNode -> next; // to go through the list
+    }
+}
 
 int timesOccurred(int target_data) {
     if (nullptr == head){
@@ -18,10 +48,10 @@ int timesOccurred(int target_data) {
     int counter = 0;
     Node *tmpNode = head;
     do {
-        if(target_data == (*tmpNode).data) {
+        if (target_data == tmpNode -> data) {
             counter++;
         }
-        tmpNode = (*tmpNode).next;
+        tmpNode = tmpNode -> next;
     } while (tmpNode != head && tmpNode != nullptr);
 
     return counter;
@@ -36,7 +66,7 @@ int length() {
     Node *tmpNode = head;
     do {
         length++;
-        tmpNode = (*tmpNode).next;
+        tmpNode = tmpNode -> next;
     } while (tmpNode != head && tmpNode != nullptr);
     return length;
 }
@@ -48,9 +78,9 @@ int isCLL() {
     Node* Move1 = head;
     Node* Move2 = head;
 
-    while (Move2 != nullptr && (*Move2).next != nullptr) {
-        Move1 = (*Move1).next;
-        Move2 = (*(*Move2).next).next;
+    while (Move2 != nullptr && Move2 -> next != nullptr) {
+        Move1 = Move1 -> next;
+        Move2 = Move2 -> next -> next;
 
         if (Move1 == Move2) {
             return 1;
@@ -68,7 +98,7 @@ int isDLL() {
     Node *tmpNode = head;
 
     tmpNode = head;
-    if (tmpNode->next->prev == tmpNode) {
+    if (tmpNode -> next -> prev == tmpNode) {
         return 1;
     }
     return -1;
@@ -85,15 +115,15 @@ bool isEmpty() {
 void Display() {
     Node *tmpNode = head;
     do {
-        cout << (*tmpNode).data << " ";
-        tmpNode = (*tmpNode).next; // to go through the list
+        cout << tmpNode -> data << " ";
+        tmpNode = tmpNode -> next;
     } while (tmpNode != head && tmpNode != nullptr);
     
     if (isCLL() == 1) {
-        cout << "...";
+        cout << " ... ";
     }
     if (isDLL() == 1){
-        cout << "<->";
+        cout << " <---> ";
     }
 }
 
@@ -157,17 +187,19 @@ void reverse() {
     int i = 0;
 
     do {
-        storage[i] = tmpNode->data;
-        tmpNode = tmpNode->next; // to go through the list
+        storage[i] = tmpNode -> data;
+        tmpNode = tmpNode -> next;
         i++;
-    } while (tmpNode != head);
-
-    i -= 1;
-    do {
-        tmpNode->data = storage[i];
-        tmpNode = tmpNode->next;
-        i--;
     } while (tmpNode != head && tmpNode != nullptr);
+
+i -= 1;
+tmpNode = head; // Reset tmpNode to head before reversing
+
+do {
+    tmpNode -> data = storage[i];
+    tmpNode = tmpNode -> next;
+    i--;
+} while (tmpNode != head && tmpNode != nullptr);
 
     delete[] storage;
 }
@@ -183,8 +215,8 @@ void reverseDisplay() {
     int i = 0;
 
     do {
-        storage[i] = tmpNode->data;
-        tmpNode = tmpNode->next; // to go through the list
+        storage[i] = tmpNode -> data;
+        tmpNode = tmpNode -> next; // to go through the list
         i++;
     } while (tmpNode != head && tmpNode != nullptr);
 
@@ -193,6 +225,13 @@ void reverseDisplay() {
     }
 
     delete[] storage;
+
+    if (isCLL() == 1) {
+        cout << " ... ";
+    }
+    if (isDLL() == 1){
+        cout << " <---> ";
+    }
 }
 
 void rotateBy(int NumberofRotates) {
@@ -206,14 +245,15 @@ void rotateBy(int NumberofRotates) {
     int i = 0;
 
     do {
-        storage[i] = tmpNode->data;
-        tmpNode = tmpNode->next;
+        storage[i] = tmpNode -> data;
+        tmpNode = tmpNode -> next;
         i++;
     } while (tmpNode != head && tmpNode != nullptr);
 
-
+    int wasCLL = 0;
     if (isCLL() == -1) {
-        tail->next = head;
+        tail -> next = head;
+        wasCLL = 1;
     }
 
     tmpNode = head;
@@ -222,12 +262,13 @@ void rotateBy(int NumberofRotates) {
         tmpNode -> data = storage[(i + NumberofRotates) % length()];
         tmpNode = tmpNode->next;
     }
-
+    if (wasCLL){
     tail -> next = nullptr;
+    }
     delete[] storage;
 }
 
-void modify(int item, int data){
+void modify(int item, int data) {
     if (nullptr == head) {
         return;
     }
